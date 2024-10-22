@@ -31,7 +31,7 @@ To create a window using Fluent UI, please insert the following code snippet int
 ```lua Window.lua
 task.wait(3)
 -- This script looks for the Fluent Library installed in the first step.
-local Main = require(game:GetService("ReplicatedStorage"):WaitForChild("Fluent"))
+local Main = require(game:GetService("ReplicatedStorage").Fluent:WaitForChild("MainModule"))
 
 -- This makes the window.
 local Window = Main:CreateWindow({
