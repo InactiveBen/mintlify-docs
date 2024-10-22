@@ -1,37 +1,27 @@
 ---
-title: 'Code Blocks'
-description: 'Display inline code and code blocks'
-icon: 'code'
+title: 'Fluent UI Documentation'
+description: 'Comprehensive guide for using the Fluent UI library in Roblox.'
+icon: 'ui'
 ---
 
-## Basic
+## Overview
 
-### Inline Code
+Fluent is a user interface library designed for Roblox, allowing developers to create customizable and interactive windows, tabs, and components with ease.
 
-To denote a `word` or `phrase` as code, enclose it in backticks (`).
+## Creating a Window
 
-```
-To denote a `word` or `phrase` as code, enclose it in backticks (`).
-```
+This is how you create the actual window for your interface.
 
-### Code Block
+```lua
+local Main = require(game:GetService("ReplicatedStorage"):WaitForChild("Fluent"):WaitForChild("MainModule"))
 
-Use [fenced code blocks](https://www.markdownguide.org/extended-syntax/#fenced-code-blocks) by enclosing code in three backticks and follow the leading ticks with the programming language of your snippet to get syntax highlighting. Optionally, you can also write the name of your code after the programming language.
-
-```java HelloWorld.java
-class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
+local Window = Main:Window{
+    Title = `Fluent {Main.Version}`, -- This is your title
+    SubTitle = "by Actual Master Oogway", -- This is the sub title (light text next to title)
+    TabWidth = 160, -- This is the tab width
+    Size = UDim2.fromOffset(830, 525), -- This is the size of the interface
+    Resize = true, -- Whether the window can be resized
+    Acrylic = true, -- Acrylic on or off (it blurs anything behind the interface, requires graphic quality 8+)
+    Theme = "Vynixu", -- The themes supported can be found in the themes category.
+    MinimizeKey = Enum.KeyCode.RightControl -- Key to minimize or close the interface
 }
-```
-
-````md
-```java HelloWorld.java
-class HelloWorld {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}
-```
-````
