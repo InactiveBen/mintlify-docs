@@ -60,5 +60,19 @@ Theme = "Cyberpunk"
 ```
 </Accordion>
 
+### Adding Tabs
 
+You can add tabs to your <Tooltip tip="`Fluent_Interface` should have the window already created if you followed the steps above.">window</Tooltip> as follows:
 
+<Info> 
+You can use most icons from [Lucide](https://lucide.dev/icons/) by specifying them like this: `Icon = "box"`.
+</Info>
+<CodeGroup>
+```lua Tabs.lua
+local Tabs = {
+    Main = Window:AddTab({ Title = "Main", Icon = "box" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+    AnotherTab = Window:AddTab({ Title = "AnotherTab", Icon = "star" })
+}
+```
+</CodeGroup>
