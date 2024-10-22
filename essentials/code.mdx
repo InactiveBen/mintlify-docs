@@ -6,19 +6,115 @@ icon: 'book'
 
 ## Getting Started
 Fluent is designed to be user-friendly and intuitive, allowing developers to create beautiful and functional user interfaces with ease. Whether you're new to Lua scripting or an experienced developer, Fluent provides a straightforward approach to building your UI components.
+<CardGroup cols={3}>
+  <Card
+    title="Download Fluent"
+    icon="download"
+    href="https://example.com"
+  >
+    This action will download the **Fluent Library** directly to your device.
+  </Card>
+  <Card
+    title="Install from Roblox"
+    icon="arrow-down"
+    href="https://example.com"
+  >
+    This will redirect you to the **Roblox Creator Marketplace** for installation.
+  </Card>
+  <Tooltip tip="Instructions for installation are not provided for Rojo installations. Please ensure you have a good understanding of how Rojo works if you choose this option.">
+    <Card
+      title="Install with Rojo"
+      icon="code"
+      href="https://example.com"
+    >
+      This option will install the Rojo version of the **Fluent Library**. Hover over the card to see the tooltip.
+    </Card>
+  </Tooltip>
+</CardGroup>
+<Warning>
+  The documentation below provides instructions for installing the **Fluent Library** via the **Download Fluent** option and from the **Roblox Marketplace**. For installation using **Rojo**, it is assumed that you have a sufficient understanding of the process.
+</Warning>
+<AccordionGroup>
+  <Accordion title="How to Set Up" icon="setup">
+    <Accordion title="Installing Fluent Library" icon="download">
+      <p>
+        To install the **Fluent Library**, follow these steps:
+      </p>
+      <ol>
+        <li>Open your downloads folder on your device.</li>
+        <li>Locate the <strong>fluent.rbxm</strong> file.</li>
+        <li>Open your Roblox project.</li>
+        <li>Drag the <strong>fluent.rbxm</strong> file into your project.</li>
+        <li>Locate the folder named <strong>Fluent</strong> in your workspace.</li>
+        <li>Drag the folder named <strong>Fluent</strong> into the <strong>ReplicatedStorage</strong> area.</li>
+      </ol>
+<Warning>
+       **Warning:** Please do not edit any code in the folder, as it is a package link and will receive auto-updates when the **Fluent Library** is updated.
+</Warning>
+    </Accordion>
 
-<Card title="Image Card" img="https://cdn.uncopylocked.com/attachments/favico.png">
-  Here is an example of a card with an image
-</Card>
+    <Accordion title="Installing from Roblox Marketplace" icon="shop">
+      <p>
+        To install the **Fluent Library** from the Roblox Marketplace, follow these steps:
+      </p>
+      <ol>
+        <li>Get a copy of the asset from the Roblox Marketplace.</li>
+        <li>Open your toolbox.</li>
+        <li>Find your owned assets and double-click on the **Fluent Library** asset.</li>
+        <li>Click "OK" when prompted.</li>
+        <li>Locate the <strong>Fluent</strong> folder that was added to your workspace.</li>
+        <li>Drag the <strong>Fluent</strong> folder into the <strong>ReplicatedStorage</strong> area.</li>
+      </ol>
+<Warning>
+       **Warning:** Please do not edit any code in the folder, as it is a package link and will receive auto-updates when the **Fluent Library** is updated.
+</Warning>
+    </Accordion>
+
+    <Accordion title="Installing with Rojo" icon="code">
+      <p>
+        To install the **Fluent Library** using Rojo, ensure that you have Rojo installed on your machine. After that, sync the package with your project like you would normally do. If done correctly, Rojo will automatically install the **Fluent Library** for you.
+      </p>
+<Warning>
+    **PLEASE READ THIS WARNING:** Packages installed via Rojo are not auto-updated, and Rojo is not the recommended installation method. I also update the Rojo file download every few months, rather than providing the regular updates that both the Marketplace and Library downloads receive.
+</Warning>
+    </Accordion>
+  </Accordion>
+</AccordionGroup>
+
+
+
+
+### Create a LocalScript
+Assuming you have successfully completed the installation steps for the **Fluent Library** as outlined in the previous section, you can proceed to initialize the library by executing the following code in the terminal. This code will create a <Tooltip tip="A LocalScript is a script that runs on the client-side.">LocalScript</Tooltip> named `Fluent_Interface` within the `StarterPlayerScripts` category. 
+
+Please ensure that you have **Roblox Studio** open and that the <Tooltip tip="You can find the Terminal under 'View' > 'Command Bar'">**command bar**</Tooltip> is accessible before executing the code:
+
+<CodeGroup> 
+```lua CreateLocalScript.lua
+local StarterPlayer = game:GetService("StarterPlayer") 
+local create = Instance.new("LocalScript") 
+create.Name = "Fluent_Interface" 
+create.Parent = StarterPlayer:WaitForChild("StarterPlayerScripts") 
+``` 
+
+</CodeGroup>
+<Info>
+Alternatively, you can manually create a LocalScript under the StarterPlayerScripts category. You may name it whatever you prefer, but in the documentation, it will be referred to as Fluent_Interface.
+</Info>
 
 ### Create a Window
 
-To create a window using Fluent UI, use the following code snippet:
-Here's a more professional version of your message:
+To create a window using Fluent UI, please insert the following code snippet into the <Tooltip tip="Ensure that you have a LocalScript under `StarterPlayerScripts`, referred to as `Fluent_Interface` in this example.">Fluent_Interface</Tooltip> script that you created earlier.
+
 
 
 <CodeGroup>
 ```lua Window.lua
+task.wait(3)
+-- This script looks for the Fluent Library installed in the first step.
+local Main = require(game:GetService("ReplicatedStorage"):WaitForChild("Fluent"))
+
+-- This makes the window.
 local Window = Main:CreateWindow({
 	Title = "Fluent " .. Main.Version,
 	SubTitle = "by Zuq",
@@ -55,7 +151,8 @@ Theme = "Cyberpunk"
 
 ### Adding Tabs
 
-You can add tabs to your window as follows:
+You can add tabs to your <Tooltip tip="`Fluent_Interface` should have the window already created if you followed the steps above.">window</Tooltip> as follows:
+
 <Info> 
 You can use most icons from [Lucide](https://lucide.dev/icons/) by specifying them like this: `Icon = "box"`.
 </Info>
@@ -68,11 +165,13 @@ local Tabs = {
 }
 ```
 </CodeGroup>
-### Adding Components
+# Adding Components
+Great work! By now, you should have a window and some tabs created. If you haven't done so already, please return to the "Create a Window" section for further instructions.
 
 #### Paragraph
 
-Add a paragraph with the following code:
+Add a paragraph to your <Tooltip tip="You should have the tabs already created if you followed the steps above.">Tabs</Tooltip> with the following code:
+
 <CodeGroup>
 ```lua Paragraph.lua
 Tabs.Main:AddParagraph({
@@ -83,7 +182,7 @@ Tabs.Main:AddParagraph({
 </CodeGroup>
 #### Button
 
-To create a button:
+Add a button to your <Tooltip tip="You should have the tabs already created if you followed the steps above.">Tabs</Tooltip> with the following code:
 <CodeGroup>
 ```lua Button.lua
 local Button = Tabs.Main:AddButton({
@@ -157,7 +256,7 @@ local ButtonWithConfirmAndDialog = Tabs.Main:AddButton({
 </CodeGroup>
 #### Toggle
 
-To add a toggle switch:
+Add a toggle switch to your <Tooltip tip="You should have the tabs already created if you followed the steps above.">Tabs</Tooltip> with the following code:
 
 <CodeGroup>
 ```lua Toggle.lua
@@ -171,7 +270,7 @@ local Toggle = Tabs.Main:AddToggle("Toggle", {Title = "Toggle", Default = true }
 
 #### Slider
 
-Add a slider to adjust values:
+Add a slider to your <Tooltip tip="You should have the tabs already created if you followed the steps above.">Tabs</Tooltip> with the following code:
 
 <CodeGroup>
 ```lua Slider.lua
@@ -186,9 +285,7 @@ local Slider = Tabs.Main:AddSlider("Slider", {
 ```
 </CodeGroup>
 #### Dropdown
-
-For a single-select dropdown:
-
+Add a single-select dropdown to your <Tooltip tip="You should have the tabs already created if you followed the steps above.">Tabs</Tooltip> with the following code:
 <CodeGroup>
 ```lua Dropdown.lua
 local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
@@ -213,8 +310,7 @@ local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
 
 
 #### MultiDropdown
-
-For a multi-select dropdown:
+Add a multi-select dropdown to your <Tooltip tip="You should have the tabs already created if you followed the steps above.">Tabs</Tooltip> with the following code:
 <CodeGroup>
 ```lua MultiDropdown.lua
 local MultiDropdown = Tabs.Main:AddDropdown("MultiDropdown", {
@@ -244,8 +340,7 @@ MultiDropdown:SetValue({
 
 
 #### Colorpicker
-
-To add a color picker:
+Add a color picker to your <Tooltip tip="You should have the tabs already created if you followed the steps above.">Tabs</Tooltip> with the following code:
 
 <CodeGroup>
 ```lua ColorPicker.lua
@@ -257,7 +352,7 @@ local Colorpicker = Tabs.Main:AddColorpicker("Colorpicker", {
 </CodeGroup>
 #### Keybind
 
-For setting up a keybind:
+For setting up a keybind inside of your <Tooltip tip="You should have the tabs already created if you followed the steps above.">Tab</Tooltip> with the following code:
 
 <CodeGroup>
 ```lua Keybind.lua
@@ -273,7 +368,8 @@ local Keybind = Tabs.Main:AddKeybind("Keybind", {
 </CodeGroup>
 #### Input
 
-Add an input box:
+Add an imput box to your <Tooltip tip="You should have the tabs already created if you followed the steps above.">Tabs</Tooltip> with the following code:
+
 
 <CodeGroup>
 ```lua InputBox.lua
@@ -343,7 +439,9 @@ end)
 
 ### Notifications
 
-To send a notification
+To send a <Tooltip tip="This shows an alert for the duration specified in the bottom right corner. You can have as many notifications as you want at a time; however, it is recommended to not display more than 8 simultaneously.">notification</Tooltip> follow the instructions below:
+
+
 <Note>
 We recommend using notifications instead of warnings and print statements, as they don't affect your game metrics when reviewing overall game performance. Notifications will alert you in the corner of your screen if something fails to run, ensuring better visibility without cluttering your logs.
 </Note>
@@ -403,3 +501,49 @@ InterfaceSection:AddKeybind("MenuKeybind", { Title = "Minimize Bind", Default = 
 Main.MinimizeKeybind = Main.Options.MenuKeybind 
 ```
 </CodeGroup>
+
+### Frequently Asked Questions
+<Accordion title="What is Fluent UI?" icon="info"> 
+  <p>Fluent UI is a library designed to help developers create beautiful and functional user interfaces in Roblox. It provides a variety of customizable components and themes.</p> 
+</Accordion> 
+<Accordion title="Is Fluent UI free to use?" icon="dollar-sign"> 
+  <p>Yes, Fluent UI is free to use for any projects on Roblox.</p> 
+</Accordion> 
+<Accordion title="Can I contribute to Fluent UI?" icon="note"> 
+  <p>Absolutely! We welcome contributions and suggestions to improve Fluent UI. Feel free to reach out on our community channels.</p> 
+</Accordion> 
+<Accordion title="What platforms is Fluent UI compatible with?" icon="check"> 
+  <p>Fluent UI is designed for Roblox, making it fully compatible with any Roblox game or project.</p> 
+</Accordion>
+<Accordion title="How do I get started with Fluent UI?" icon="rocket"> 
+  <p>You can get started by following the installation guide in the documentation. It provides step-by-step instructions on how to integrate Fluent UI into your project.</p> 
+</Accordion> 
+<Accordion title="What components are available in Fluent UI?" icon="grid"> 
+  <p>Fluent UI offers a wide range of components, including buttons, sliders, dropdowns, modals, and more. Check the components section in the documentation for a full list.</p> 
+</Accordion> 
+<Accordion title="Is there support available for Fluent UI?" icon="user"> 
+  <p>Yes! We provide support through our community channels. Feel free to ask questions, report issues, or request features.</p> 
+</Accordion>
+<Accordion title="Can I use Fluent UI in my game without any restrictions?" icon="shield"> 
+  <p>Yes, you can use Fluent UI freely in your games without restrictions, as long as you comply with the Roblox community guidelines.</p> 
+</Accordion>
+<Accordion title="Can I donate to help fund more features?" icon="heart"> 
+  <p>Yes, we appreciate any support! <a href="https://donate.stripe.com/eVacNe8cm1MtcAo28h">Click here to leave a donation!</a>.</p> 
+</Accordion>
+
+### Thank You for using Fluent
+We hope this documentation helps you create amazing user interfaces in your projects.
+
+<CardGroup cols={3}>
+  <Card title="Twitter" icon="twitter" href="https://x.com/inactiveben">
+    Follow us on Twitter for updates and news about Fluent UI.
+  </Card>
+
+  <Card title="Discord" icon="discord" href="https://discord.gg/Fluent">
+    Join our Discord community to connect with other users and get support.
+  </Card>
+
+  <Card title="Email" icon="envelope" href="mailto:support-en@uncopylocked.com">
+  For any inquiries or takedown requests, please reach out to us via email. 
+  </Card>
+</CardGroup>
