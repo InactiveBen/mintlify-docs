@@ -9,14 +9,42 @@ Fluent is designed to be user-friendly and intuitive, allowing developers to cre
 
 You need to include this at the beginning of your code to call the UI library.
 <CodeGroup>
-```lua Required.lua
-task.wait(3) -- NOT REQUIRED BUT STRONGLY RECOMENDED
-local Main = require(game:GetService("ReplicatedStorage"):WaitForChild("Fluent"))
+```lua FluentStart.lua
+--[[
+
+███████╗██╗     ██╗   ██╗███████╗███╗   ██╗████████╗
+██╔════╝██║     ██║   ██║██╔════╝████╗  ██║╚══██╔══╝
+█████╗  ██║     ██║   ██║█████╗  ██╔██╗ ██║   ██║   
+██╔══╝  ██║     ██║   ██║██╔══╝  ██║╚██╗██║   ██║   
+██║     ███████╗╚██████╔╝███████╗██║ ╚████║   ██║   
+╚═╝     ╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝
+Note: It is not mandatory, but strongly recommended to include task.wait(3) at the beginning of your code. If you prefer not to use the wait, you can utilize the Fluent.lua version instead.
+
+--]]
+task.wait(3) -- Waits for 3 seconds to ensure assets are ready.
+local Main = require(93780747008999) -- ITS OPEN SOURCE. :)
+print("Currently running Fluent Version: " .. Main.Version) -- This will print the current version of Fluent.
 ```
+
+``` lua Fluent.lua
+--[[
+███████╗██╗     ██╗   ██╗███████╗███╗   ██╗████████╗
+██╔════╝██║     ██║   ██║██╔════╝████╗  ██║╚══██╔══╝
+█████╗  ██║     ██║   ██║█████╗  ██╔██╗ ██║   ██║   
+██╔══╝  ██║     ██║   ██║██╔══╝  ██║╚██╗██║   ██║   
+██║     ███████╗╚██████╔╝███████╗██║ ╚████║   ██║   
+╚═╝     ╚══════╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝
+Note: It is not mandatory, but strongly recommended to include task.wait(3) at the beginning of your code. If you prefer not to use the wait, you can utilize the Fluent.lua version instead.
+
+--]]
+local Main = require(93780747008999) -- ITS OPEN SOURCE. :)
+print("Currently running Fluent Version: " .. Main.Version) -- This will print the current version of Fluent.
+```
+
 </CodeGroup>
-<Tip> 
-It is not mandatory, but strongly recommended to include `task.wait(3)` at the beginning of your code. This practice helps ensure that all necessary assets are fully loaded before the UI is initialized.
-</Tip>
+<Warning> 
+**Note:** It is not mandatory, but strongly recommended to include `task.wait(3)` at the beginning of your code. If you prefer not to use the wait, you can utilize the `Fluent.lua` version instead.
+</Warning>
 ### Create a Window
 
 To create a window using Fluent UI, use the following code snippet:
