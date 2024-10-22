@@ -39,16 +39,10 @@
       "pages": [
         "introduction",
         "quickstart",
-		"core",
+		    "core",
         "compnents"
 
 
-      ]
-    },
-    {
-      "group": "Fluent",
-      "pages": [
-        "Fluent/fluent"
       ]
     }
   ],
