@@ -53,13 +53,13 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
+        "quickstart"
       ]
     },
     {
       "group": "Fluent ",
       "pages": [
-        "essentials/fluent",
+        "essentials/fluent"
       ]
     },
     {
