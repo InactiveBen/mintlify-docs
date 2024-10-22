@@ -1,11 +1,40 @@
 ### Example Code
+Want to try out Fluent without having your own custom interface? We offer an example script just for that reason!
 
-```lua
+  <Card
+    title="Fluent Library Setup"
+    icon="book"
+    href="https://docs.fishbowl.cloud/quickstart"
+  >
+    <p>Step-by-step instructions to install and configure the Fluent Library. Get started quickly with our detailed setup guide!</p>
+  </Card>
+
+<Warning>
+You must have the Fluent Library installed in your workspace for this to work.
+</Warning>
+
+
+You can also test the interface in our Roblox testing place!
+<Warning>
+This is an example place, better examples are done below and are created to run in studio. There is no security with this you are expected to add your own checks.
+</Warning>
+
+  <Card
+    title="View the Fluent Interface"
+    icon="play"
+    href="https://www.roblox.com/games/110559969644935/Untitled-Game"
+  >
+    <p>Experience the Fluent Library in action!</p>
+  </Card>
+
+<CodeGroup>
+```lua Example 1: Fluent Preview
+task.wait(3)
 local Main = require(game:GetService("ReplicatedStorage").Fluent:WaitForChild("MainModule"))
 
 local Window = Main:CreateWindow({
     Title = "Fluent " .. Main.Version,
-    SubTitle = "by dawid",
+    SubTitle = "by zuq",
     TabWidth = 160,
     Size = UDim2.fromOffset(580, 460),
     Acrylic = true,
@@ -206,24 +235,193 @@ Main:Notify({
     Duration = 8
 })
 ```
+```lua Example 2: Basic Notification and Input Handling
+task.wait(3)
+local Main = require(game:GetService("ReplicatedStorage").Fluent:WaitForChild("MainModule"))
 
-### Components Explained
+local Window = Main:CreateWindow({
+    Title = "Notification Example",
+    SubTitle = "by zuq",
+    Size = UDim2.fromOffset(400, 300),
+    Acrylic = false,
+    Theme = "Light"
+})
 
-- **CreateWindow**: Initializes a new window for the Fluent UI interface.
-- **AddTab**: Adds tabs to the window. Each tab can contain various UI elements.
-- **AddParagraph**: Adds a paragraph of text to the tab.
-- **AddButton**: Creates a button with a callback function for actions.
-- **AddToggle**: Creates a toggle switch for boolean options.
-- **AddSlider**: Adds a slider for selecting a numeric value within a range.
-- **AddDropdown**: Creates a dropdown list for selecting one or multiple options.
-- **AddColorpicker**: Allows users to pick colors and adjust transparency.
-- **AddKeybind**: Sets up a keybind for user-defined actions.
-- **AddInput**: Provides a text input field for user input.
+local Tabs = {
+    Notifications = Window:AddTab({ Title = "Notifications", Icon = "bell" }),
+}
 
-### Notifications
+Tabs.Notifications:AddButton({
+    Title = "Show Notification",
+    Description = "Click to show a notification.",
+    Callback = function()
+        Main:Notify({
+            Title = "Notification",
+            Content = "This is a notification message!",
+            Duration = 5
+        })
+    end
+})
 
-- **Notify**: Displays a notification to the user when the script is loaded.
+Tabs.Notifications:AddInput("NameInput", {
+    Title = "Enter Your Name",
+    Default = "",
+    Placeholder = "Type your name here...",
+    Callback = function(value)
+        Main:Notify({
+            Title = "Input Received",
+            Content = "Hello, " .. value .. "!",
+            Duration = 5
+        })
+    end
+})
 
----
+Main:Notify({
+    Title = "Ready",
+    Content = "You can now test the notifications.",
+    Duration = 5
+})
+```
+```lua Example 3: Slider and Colorpicker Interaction
+task.wait(1)
+local Main = require(game:GetService("ReplicatedStorage").Fluent:WaitForChild("MainModule"))
 
-Feel free to adjust any specific sections or add more details based on your requirements!
+local Window = Main:CreateWindow({
+    Title = "Slider & Color Picker Example",
+    SubTitle = "by zuq",
+    Size = UDim2.fromOffset(500, 400),
+    Acrylic = true,
+    Theme = "Dark"
+})
+
+local Tabs = {
+    Sliders = Window:AddTab({ Title = "Sliders", Icon = "slider" }),
+}
+
+local Slider = Tabs.Sliders:AddSlider("ColorSlider", {
+    Title = "Adjust Color Value",
+    Description = "Change the RGB value.",
+    Default = 128,
+    Min = 0,
+    Max = 255,
+    Rounding = 0
+})
+
+local ColorPicker = Tabs.Sliders:AddColorpicker("ColorPicker", {
+    Title = "Choose a Color",
+    Default = Color3.fromRGB(255, 255, 255)
+})
+
+Slider:OnChanged(function(value)
+    local color = Color3.fromRGB(value, 0, 255)
+    ColorPicker:SetValue(color)
+end)
+
+ColorPicker:OnChanged(function(color)
+    print("Color chosen:", color)
+end)
+
+Main:Notify({
+    Title = "Ready to Use",
+    Content = "You can adjust the slider and see the color change.",
+    Duration = 5
+})
+```
+```lua Example 4: Keybind and Toggle Interaction
+task.wait(1)
+local Main = require(game:GetService("ReplicatedStorage").Fluent:WaitForChild("MainModule"))
+
+local Window = Main:CreateWindow({
+    Title = "Keybind & Toggle Example",
+    SubTitle = "by zuq",
+    Size = UDim2.fromOffset(450, 350),
+    Acrylic = false,
+    Theme = "Light"
+})
+
+local Tabs = {
+    Controls = Window:AddTab({ Title = "Controls", Icon = "controls" }),
+}
+
+local Keybind = Tabs.Controls:AddKeybind("ToggleKeybind", {
+    Title = "Toggle Action",
+    Mode = "Hold",
+    Default = "M",
+    ChangedCallback = function(new)
+        print("Keybind changed to:", new)
+    end
+})
+
+local Toggle = Tabs.Controls:AddToggle("ActionToggle", {
+    Title = "Enable Action",
+    Default = false,
+    Callback = function(value)
+        print("Toggle is now:", value and "Enabled" or "Disabled")
+    end
+})
+
+task.spawn(function()
+    while true do
+        wait(0.5)
+        if Keybind:GetState() then
+            print("Keybind is currently held down")
+            Toggle:SetValue(not Toggle.Value) -- Toggle the state when the key is pressed
+        end
+    end
+end)
+
+Main:Notify({
+    Title = "Controls Ready",
+    Content = "Use 'M' to toggle the action.",
+    Duration = 5
+})
+
+```
+```lua Example 5: Multi-Tab Interface with Settings
+task.wait(1)
+local Main = require(game:GetService("ReplicatedStorage").Fluent:WaitForChild("MainModule"))
+
+local Window = Main:CreateWindow({
+    Title = "Multi-Tab Example",
+    SubTitle = "by zuq",
+    Size = UDim2.fromOffset(600, 500),
+    Acrylic = true,
+    Theme = "Dark"
+})
+
+local Tabs = {
+    Main = Window:AddTab({ Title = "Home", Icon = "home" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
+}
+
+Tabs.Main:AddParagraph({
+    Title = "Welcome",
+    Content = "This is the main tab. Use the settings tab to customize."
+})
+
+Tabs.Settings:AddToggle("EnableFeature", {
+    Title = "Enable New Feature",
+    Default = false,
+    Callback = function(value)
+        print("New Feature Enabled:", value)
+    end
+})
+
+Tabs.Settings:AddDropdown("SelectOption", {
+    Title = "Choose an Option",
+    Values = {"Option 1", "Option 2", "Option 3"},
+    Default = 1,
+    Callback = function(value)
+        print("Selected Option:", value)
+    end
+})
+
+Main:Notify({
+    Title = "Welcome",
+    Content = "Explore the tabs for more options!",
+    Duration = 5
+})
+
+
+```
+</CodeGroup>
