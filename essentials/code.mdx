@@ -1,117 +1,316 @@
 ---
 title: 'Fluent UI Documentation'
-description: 'Comprehensive guide for using the Fluent UI library in Roblox.'
-icon: 'ui'
+description: 'Comprehensive guide for using Fluent UI components'
+icon: 'book'
 ---
 
-## Overview
+## Getting Started
+Fluent is designed to be user-friendly and intuitive, allowing developers to create beautiful and functional user interfaces with ease. Whether you're new to Lua scripting or an experienced developer, Fluent provides a straightforward approach to building your UI components.
 
-Fluent is a user interface library designed for Roblox, allowing developers to create customizable and interactive windows, tabs, and components with ease.
+### Create a Window
 
-## Creating a Window
+To create a window using Fluent UI, use the following code snippet:
+Here's a more professional version of your message:
 
-This is how you create the actual window for your interface.
+<Tip> 
+It is not mandatory, but strongly recommended to include `task.wait(3)` at the beginning of your code. This practice helps ensure that all necessary assets are fully loaded before the UI is initialized.
+</Tip>
 
 ```lua
-local Main = require(game:GetService("ReplicatedStorage"):WaitForChild("Fluent"):WaitForChild("MainModule"))
+task.wait(3) -- NOT REQUIRED BUT STRONGLY RECOMENDED
+local Main = require(game:GetService("ReplicatedStorage"):WaitForChild("Fluent"))
 
-local Window = Main:Window{
-    Title = `Fluent {Main.Version}`, -- This is your title
-    SubTitle = "by Actual Master Oogway", -- This is the sub title (light text next to title)
-    TabWidth = 160, -- This is the tab width
-    Size = UDim2.fromOffset(830, 525), -- This is the size of the interface
-    Resize = true, -- Whether the window can be resized
-    Acrylic = true, -- Acrylic on or off (it blurs anything behind the interface, requires graphic quality 8+)
-    Theme = "Vynixu", -- The themes supported can be found in the themes category.
-    MinimizeKey = Enum.KeyCode.RightControl -- Key to minimize or close the interface
-}
+local Window = Main:CreateWindow({
+	Title = "Fluent " .. Main.Version,
+	SubTitle = "by Zuq",
+	TabWidth = 160,
+	Size = UDim2.fromOffset(580, 460),
+	Acrylic = true,
+	Theme = "Dark" 
+})
 ```
 
-## Creating Tabs
+<Accordion title="View Themes" icon="droplet">
+### Available Theme Names:
+```lua
+Theme = "Dark"
+Theme = "Darker"
+Theme = "Vynixu"
+Theme = "Light"
+Theme = "Aqua"
+Theme = "Amethyst"
+Theme = "Rose"
+Theme = "Ocean Wave" 
+Theme = "Sunset Glow"  
+Theme = "Forest Breeze" 
+Theme = "Midnight Blue" 
+Theme = "Retro"  
+Theme = "Autumn"  
+Theme = "Cyberpunk"
+```
+</Accordion>
 
-You can create multiple tabs within your window. Each tab can contain different UI elements.
+
+
+
+### Adding Tabs
+
+You can add tabs to your window as follows:
+<Info> 
+You can use most icons from [Lucide](https://lucide.dev/icons/) by specifying them like this: `Icon = "box"`.
+</Info>
 
 ```lua
 local Tabs = {
-    Main = Window:Tab{
-        Title = "Main", -- The title of the tab
-        Icon = "circle-user-round" -- The icon for the tab
-    },
-    Settings = Window:Tab{
-        Title = "Settings", -- The title of the settings tab
-        Icon = "settings" -- The icon for the settings tab
-    }
+    Main = Window:AddTab({ Title = "Main", Icon = "box" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 ```
 
-## Adding a Paragraph
+### Adding Components
 
-To add a paragraph to a tab, you can use the `Paragraph` method.
+#### Paragraph
 
-```lua
-local Paragraph = Tabs.Main:Paragraph("Paragraph", {
-    Title = "Paragraph",
-    Content = "This is a paragraph.
-Second line!"
-})
-
-print(Paragraph.Value)
-
-Paragraph:SetValue("This paragraph text is changed!")
-
-print(Paragraph.Value)
-```
-
-## Adding a Button
-
-You can add buttons with callbacks for user interaction.
+Add a paragraph with the following code:
 
 ```lua
-Tabs.Main:Button({
-    Title = "Button",
-    Description = "Very important button",
-    Callback = function()
-        local D = Window:Dialog({
-            Title = "Title",
-            Content = "This is a dialog",
-            Buttons = {
-                {
-                    Title = "Confirm",
-                    Callback = function()
-                        Window:Dialog({
-                            Title = "Another Dialog",
-                            Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis dolor eget erat mattis, id mollis mauris cursus. Proin ornare sollicitudin odio, id posuere diam luctus id.",
-                            Buttons = { { Title = "Ok", Callback = function() print("Ok") end} }
-                        })
-                    end
-                },
-                {
-                    Title = "Cancel",
-                    Callback = function()
-                        print("Cancelled the dialog.")
-                    end
-                }
-            }
-        })
-        print(D)
-        D.Closed:Wait()
-        print("Ok!!!")
-    end
+Tabs.Main:AddParagraph({
+	Title = "Paragraph",
+	Content = "This is a paragraph.\nSecond line!"
 })
 ```
 
-## Adding a Toggle
+#### Button
 
-You can include toggle switches for binary options.
+To create a button:
 
 ```lua
-local Toggle = Tabs.Main:Toggle("Toggle", { Title = "Toggle", Default = false })
+Tabs.Main:AddButton({
+	Title = "Button",
+	Description = "Very important button",
+	Callback = function()
+		Window:Dialog({
+			Title = "Title",
+			Content = "This is a dialog",
+			Buttons = {
+				{
+					Title = "Confirm",
+					Callback = function()
+						Window:Dialog({
+							Title = "Another Dialog",
+							Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis dolor eget erat mattis, id mollis mauris cursus. Proin ornare sollicitudin odio, id posuere diam luctus id.",
+							Buttons = { { Title = "Ok", Callback = function() print("Ok") end} }
+						})
+						Main.Options.Toggle:Destroy()
+					end
+				},
+				{
+					Title = "Cancel",
+					Callback = function()
+						print("Cancelled the dialog.")
+					end
+				}
+			}
+		})
+	end
+})
+```
 
-Toggle:OnChanged(function(Value)
-    print("Toggle changed:", Value)
+#### Toggle
+
+To add a toggle switch:
+
+```lua
+local Toggle = Tabs.Main:AddToggle("Toggle", {Title = "Toggle", Default = false })
+```
+
+#### Slider
+
+Add a slider to adjust values:
+
+```lua
+local Slider = Tabs.Main:AddSlider("Slider", {
+	Title = "Slider",
+	Description = "This is a slider",
+	Default = 2.0,
+	Min = 0.0,
+	Max = 15.5,
+	Rounding = 1
+})
+```
+
+#### Dropdown
+
+For a single-select dropdown:
+
+```lua
+local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
+	Title = "Dropdown",
+	Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
+	Multi = false,
+	Default = 1,
+})
+
+Dropdown:SetValue("four")
+```
+
+#### MultiDropdown
+
+For a multi-select dropdown:
+
+```lua
+local MultiDropdown = Tabs.Main:AddDropdown("MultiDropdown", {
+	Title = "Dropdown",
+	Description = "You can select multiple values.",
+	Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
+	Multi = true,
+	Default = {"seven", "twelve"},
+})
+
+MultiDropdown:SetValue({
+	three = true,
+	five = true,
+	seven = false
+})
+```
+
+#### Colorpicker
+
+To add a color picker:
+
+```lua
+local Colorpicker = Tabs.Main:AddColorpicker("Colorpicker", {
+	Title = "Colorpicker",
+	Default = Color3.fromRGB(96, 205, 255)
+})
+```
+
+#### Keybind
+
+For setting up a keybind:
+
+```lua
+local Keybind = Tabs.Main:AddKeybind("Keybind", {
+	Title = "KeyBind",
+	Mode = "Hold",
+	Default = "LeftControl",
+	ChangedCallback = function(New)
+		print("Keybind changed:", New)
+	end
+})
+```
+
+#### Input
+
+Add an input box:
+
+```lua
+local Input = Tabs.Main:AddInput("Input", {
+	Title = "Input",
+	Default = "Default",
+	Numeric = false,
+	Finished = false,
+	Placeholder = "Placeholder text",
+	Callback = function(Value)
+		print("Input changed:", Value)
+	end
+})
+```
+
+### Events and Callbacks
+
+To handle changes in the components, you can use the following event listeners:
+<CodeGroup>
+```lua ToggleCallback.lua
+Toggle:OnChanged(function()
+	print("Toggle changed:", Main.Options["Toggle"].Value)
 end)
 ```
+``` lua SliderCallback.lua
+Slider:OnChanged(function(Value)
+	print("Slider changed:", Value)
+end)
+``` lua DropdownCallback.lua
+Dropdown:OnChanged(function(Value)
+	print("Dropdown changed:", Value)
+end)
+```
+``` lua MultiDropdown.lua
+MultiDropdown:OnChanged(function(Value)
+	local Values = {}
+	for Value, State in next, Value do
+		table.insert(Values, Value)
+	end
+	print("Mutlidropdown changed:", table.concat(Values, ", "))
+end)
+```
+``` lua ColorPickerCallback.lua
+Colorpicker:OnChanged(function()
+	print("Colorpicker changed:", TColorpicker.Value)
+end)
+```
+``` lua TColorPickerCallback.lua
+TColorpicker:OnChanged(function()
+	print(
+		"TColorpicker changed:", TColorpicker.Value,
+		"Transparency:", TColorpicker.Transparency
+	)
+end)
+```
+</CodeGroup>
 
-## Conclusion
+### Notifications
 
-This documentation provides an overview of the Fluent UI library for Roblox, helping you get started with creating beautiful and functional user interfaces. Feel free to explore and customize the examples provided!
+To send a notification when the script is loaded:
+
+```lua
+Main:Notify({
+	Title = "Fluent",
+	Content = "The script has been loaded.",
+	Duration = 8
+})
+```
+
+### Settings Tab
+
+You can also add settings for the interface theme and toggles for acrylic and transparency:
+
+<CodeGroup>
+
+```lua InterfaceTheme.lua
+local InterfaceSection = Tabs.Settings:AddSection("Interface")
+InterfaceSection:AddDropdown("InterfaceTheme", {
+    Title = "Theme",
+    Description = "Changes the interface theme.",
+    Values = Main.Themes,
+    Default = Main.Theme,
+    Callback = function(Value)
+        Main:SetTheme(Value)
+    end
+    ```
+```lua AcrylicToggle.lua
+if Main.UseAcrylic then
+    InterfaceSection:AddToggle("AcrylicToggle", {
+        Title = "Acrylic",
+        Description = "The blurred background requires graphic quality 8+",
+        Default = Main.Acrylic,
+        Callback = function(Value)
+            Main:ToggleAcrylic(Value)
+        end
+    })
+end
+```
+```lua TransparentToggle.lua
+InterfaceSection:AddToggle("TransparentToggle", {
+    Title = "Transparency",
+    Description = "Makes the interface transparent.",
+    Default = Main.Transparency,
+    Callback = function(Value)
+        Main:ToggleTransparency(Value)
+    end
+})
+```lua InterfaceSection.lua
+InterfaceSection:AddKeybind("MenuKeybind", { Title = "Minimize Bind", Default = "RightShift" })
+Main.MinimizeKeybind = Main.Options.MenuKeybind 
+```
+</CodeGroup>
