@@ -1,71 +1,136 @@
 ---
 title: Introduction
-description: 'Welcome to the home of your new documentation'
+description: 'Fluent is super easy to setup!'
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.svg"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.svg"
-  alt="Hero Dark"
-/>
+## Getting Started
+Fluent is designed to be user-friendly and intuitive, allowing developers to create beautiful and functional user interfaces with ease. Whether you're new to Lua scripting or an experienced developer, Fluent provides a straightforward approach to building your UI components.
 
-## Setting up
+<CardGroup cols={3}>
+<Tooltip tip="This is the recommended installation process and provides detailed instructions; it is also the fastest way to install!">
+    <Card
+      title="Download Fluent"
+      icon="download"
+      href="https://github.com/ZackSteiner/Fluent-Release/raw/refs/heads/main/Fluent.rbxm"
+    >
+	This action will download the **Fluent Library** directly to your device.
+    </Card>
+  </Tooltip>
+  
+<Tooltip tip="This is not the recommended way to install Fluent and does not provide detailed installation documentation. Support is not offered if you choose this method.">
+    <Card
+      title="Install with Roblox"
+      icon="shop"
+      href="https://create.roblox.com/store/asset/90096804770667/Fluent-Library"
+    >
+	This will redirect you to the **Roblox Creator Marketplace** for installation.
+    </Card>
+  </Tooltip>
 
-The first step to world-class documentation is setting up your editing environments.
-
-<CardGroup cols={2}>
+<Tooltip tip="This option will install the Rojo installation for the Fluent Library.">
   <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
-  </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
-  </Card>
-</CardGroup>
-
-## Make it yours
-
-Update your docs to your brand and add valuable content for the best user conversion.
-
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
+    title="Install using Rojo"
     icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
+    href="https://github.com/ZackSteiner/Fluent-Release/raw/refs/heads/main/Fluent.zip"
   >
-    Automatically generate endpoints from an OpenAPI spec
+    This option will install the Rojo installation for the **Fluent Library**.
+  </Card>
+</Tooltip>
+</CardGroup>
+
+<Warning>
+  The documentation below provides instructions for installing the **Fluent Library** via the **Download Fluent** option and from the **Roblox Marketplace**. For installation using **Rojo**, it is assumed that you have a sufficient understanding of the process.
+</Warning>
+
+<AccordionGroup>
+  <Accordion title="How to Set Up" icon="setup">
+    <Accordion title="Installing Fluent Library" icon="download">
+      <p>
+        To install the **Fluent Library**, follow these steps:
+      </p>
+      <Steps>
+	  <Step title="Download The Fluent File">
+Use the button above labeled **Download Fluent** to download the **fluent.rbxm** file.
+        </Step>
+        <Step title="Open Downloads Folder">
+          Open your downloads folder on your device.
+        </Step>
+        <Step title="Locate Fluent File">
+          Locate the <strong>fluent.rbxm</strong> file.
+        </Step>
+        <Step title="Open Your Project">
+          Open your Roblox project.
+        </Step>
+        <Step title="Drag Fluent File">
+          Drag the <strong>fluent.rbxm</strong> file into your project.
+        </Step>
+        <Step title="Find Fluent Folder">
+          Locate the folder named <strong>Fluent</strong> in your workspace.
+        </Step>
+        <Step title="Move Fluent Folder">
+          Drag the folder named <strong>Fluent</strong> into the <strong>ReplicatedStorage</strong> area.
+        </Step>
+      </Steps>
+      <Warning>
+        **Warning:** Please do not edit any code in the folder, as it is a package link and will receive auto-updates when the **Fluent Library** is updated.
+      </Warning>
+    </Accordion>
+
+    <Accordion title="Installing from Roblox Marketplace" icon="shop">
+      <p>
+        To install the **Fluent Library** from the Roblox Marketplace, follow these steps:
+      </p>
+      <Steps>
+        <Step title="Get Asset">
+          Get a copy of the asset from the Roblox Marketplace.
+        </Step>
+        <Step title="Open Toolbox">
+          Open your toolbox.
+        </Step>
+        <Step title="Find Owned Assets">
+          Find your owned assets and double-click on the **Fluent Library** asset.
+        </Step>
+        <Step title="Confirm Download">
+          Click "OK" when prompted.
+        </Step>
+        <Step title="Locate Fluent Folder">
+          Locate the <strong>Fluent</strong> folder that was added to your workspace.
+        </Step>
+        <Step title="Move Fluent Folder">
+          Drag the <strong>Fluent</strong> folder into the <strong>ReplicatedStorage</strong> area.
+        </Step>
+      </Steps>
+      <Warning>
+        **Warning:** Please do not edit any code in the folder, as it is a package link and will receive auto-updates when the **Fluent Library** is updated.
+      </Warning>
+    </Accordion>
+
+    <Accordion title="Installing with Rojo" icon="code">
+      <p>
+        To install the **Fluent Library** using Rojo, ensure that you have Rojo installed on your machine. After that, sync the package with your project like you would normally do. If done correctly, Rojo will automatically install the **Fluent Library** for you.
+      </p>
+      <Warning>
+        **PLEASE READ THIS WARNING:** Packages installed via Rojo are not auto-updated, and Rojo is not the recommended installation method. I also update the Rojo file download every few months, rather than providing the regular updates that both the Marketplace and Library downloads receive.
+      </Warning>
+    </Accordion>
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps
+<CardGroup cols={2}>
+  <Card
+    title="Adding Components"
+    icon="star"
+    href="https://docs.fishbowl.cloud/Fluent/fluent#adding-components"
+  >
+    Learn how to add various components to your Fluent UI interface to enhance functionality and user experience.
   </Card>
   <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
+    title="Frequently Asked Questions"
+    icon="question"
+    href="https://docs.fishbowl.cloud/Fluent/fluent#frequently-asked-questions"
   >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
+    Find answers to common questions about Fluent UI to help you get the most out of your experience.
   </Card>
 </CardGroup>
+
