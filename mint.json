@@ -7,12 +7,12 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#007B7F",    // Ocean teal
+    "light": "#00B3A6",      // Bright aqua
+    "dark": "#005C5D",       // Darker ocean teal
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#007B7F",     // Ocean teal
+      "to": "#00B3A6"        // Bright aqua
     }
   },
   "topbarLinks": [
@@ -39,15 +39,13 @@
       "pages": [
         "introduction",
         "quickstart",
-		    "core",
+        "core",
         "components"
-
-
       ]
     }
   ],
   "footerSocials": {
     "x": "https://x.com/inactiveben",
-  "discord": "https://discord.gg/FluentInterface"
+    "discord": "https://discord.gg/FluentInterface"
   }
 }
