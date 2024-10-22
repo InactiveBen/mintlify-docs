@@ -7,19 +7,24 @@ icon: 'book'
 ## Getting Started
 Fluent is designed to be user-friendly and intuitive, allowing developers to create beautiful and functional user interfaces with ease. Whether you're new to Lua scripting or an experienced developer, Fluent provides a straightforward approach to building your UI components.
 
+You need to include this at the beginning of your code to call the UI library.
+<CodeGroup>
+```lua Required.lua
+task.wait(3) -- NOT REQUIRED BUT STRONGLY RECOMENDED
+local Main = require(game:GetService("ReplicatedStorage"):WaitForChild("Fluent"))
+```
+</CodeGroup>
+<Tip> 
+It is not mandatory, but strongly recommended to include `task.wait(3)` at the beginning of your code. This practice helps ensure that all necessary assets are fully loaded before the UI is initialized.
+</Tip>
 ### Create a Window
 
 To create a window using Fluent UI, use the following code snippet:
 Here's a more professional version of your message:
 
-<Tip> 
-It is not mandatory, but strongly recommended to include `task.wait(3)` at the beginning of your code. This practice helps ensure that all necessary assets are fully loaded before the UI is initialized.
-</Tip>
 
-```lua
-task.wait(3) -- NOT REQUIRED BUT STRONGLY RECOMENDED
-local Main = require(game:GetService("ReplicatedStorage"):WaitForChild("Fluent"))
-
+<CodeGroup>
+```lua Window.lua
 local Window = Main:CreateWindow({
 	Title = "Fluent " .. Main.Version,
 	SubTitle = "by Zuq",
@@ -29,7 +34,8 @@ local Window = Main:CreateWindow({
 	Theme = "Dark" 
 })
 ```
-
+</CodeGroup>
+<Info> Fluent offers a diverse selection of themes to enhance your user interface. Simply edit the `Theme = "ThemeName"` to swap themes.</Info>
 <Accordion title="View Themes" icon="droplet">
 ### Available Theme Names:
 ```lua
@@ -59,33 +65,42 @@ You can add tabs to your window as follows:
 <Info> 
 You can use most icons from [Lucide](https://lucide.dev/icons/) by specifying them like this: `Icon = "box"`.
 </Info>
-
-```lua
+<CodeGroup>
+```lua Tabs.lua
 local Tabs = {
     Main = Window:AddTab({ Title = "Main", Icon = "box" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+    AnotherTab = Window:AddTab({ Title = "AnotherTab", Icon = "star" })
 }
 ```
-
+</CodeGroup>
 ### Adding Components
 
 #### Paragraph
 
 Add a paragraph with the following code:
-
-```lua
+<CodeGroup>
+```lua Paragraph.lua
 Tabs.Main:AddParagraph({
 	Title = "Paragraph",
 	Content = "This is a paragraph.\nSecond line!"
 })
 ```
-
+</CodeGroup>
 #### Button
 
 To create a button:
-
-```lua
-Tabs.Main:AddButton({
+<CodeGroup>
+```lua Button.lua
+local Button = Tabs.Main:AddButton({
+	Title = "Button",
+	Description = "Very important button",
+	Callback = function()
+	end
+})
+```
+```lua ButtonWithConfirmDialog.lua
+local ButtonWithConfirm = Tabs.Main:AddButton({
 	Title = "Button",
 	Description = "Very important button",
 	Callback = function()
@@ -96,12 +111,7 @@ Tabs.Main:AddButton({
 				{
 					Title = "Confirm",
 					Callback = function()
-						Window:Dialog({
-							Title = "Another Dialog",
-							Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis dolor eget erat mattis, id mollis mauris cursus. Proin ornare sollicitudin odio, id posuere diam luctus id.",
-							Buttons = { { Title = "Ok", Callback = function() print("Ok") end} }
-						})
-						Main.Options.Toggle:Destroy()
+						-- What it should do if confirmed
 					end
 				},
 				{
@@ -114,21 +124,63 @@ Tabs.Main:AddButton({
 		})
 	end
 })
+
+```
+```lua ButtonWithConfirmAndAdditionalDialog.lua
+local ButtonWithConfirmAndDialog = Tabs.Main:AddButton({
+	Title = "Button",
+	Description = "Very important button",
+	Callback = function()
+		Window:Dialog({
+			Title = "Title",
+			Content = "This is a dialog",
+			Buttons = {
+				{
+					Title = "Confirm",
+					Callback = function()
+              -- What it should do if confirmed
+              -- Second popup after it does that action
+						Window:Dialog({
+							Title = "Another Dialog",
+							Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis dolor eget erat mattis, id mollis mauris cursus. Proin ornare sollicitudin odio, id posuere diam luctus id.",
+							Buttons = { { Title = "Ok", Callback = function() print("Ok") end} }
+						})
+					end
+				},
+				{
+					Title = "Cancel",
+					Callback = function()
+						print("Cancelled the dialog.")
+					end
+				}
+			}
+		})
+	end
+})
+
 ```
 
+</CodeGroup>
 #### Toggle
 
 To add a toggle switch:
 
-```lua
+<CodeGroup>
+```lua Toggle.lua
 local Toggle = Tabs.Main:AddToggle("Toggle", {Title = "Toggle", Default = false })
 ```
+```lua Toggle_PreToggled.lua
+local Toggle = Tabs.Main:AddToggle("Toggle", {Title = "Toggle", Default = true })
+```
+</CodeGroup>
+
 
 #### Slider
 
 Add a slider to adjust values:
 
-```lua
+<CodeGroup>
+```lua Slider.lua
 local Slider = Tabs.Main:AddSlider("Slider", {
 	Title = "Slider",
 	Description = "This is a slider",
@@ -138,12 +190,22 @@ local Slider = Tabs.Main:AddSlider("Slider", {
 	Rounding = 1
 })
 ```
-
+</CodeGroup>
 #### Dropdown
 
 For a single-select dropdown:
 
-```lua
+<CodeGroup>
+```lua Dropdown.lua
+local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
+	Title = "Dropdown",
+	Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
+	Multi = false,
+})
+
+Dropdown:SetValue("four")
+```
+```lua Dropdown_PreSelection.lua
 local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
 	Title = "Dropdown",
 	Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
@@ -151,14 +213,24 @@ local Dropdown = Tabs.Main:AddDropdown("Dropdown", {
 	Default = 1,
 })
 
-Dropdown:SetValue("four")
 ```
+</CodeGroup>
+<Note>If you want to pre-select an option (or multiple), please use `Dropdown_PreSelection.lua`</Note>
+
 
 #### MultiDropdown
 
 For a multi-select dropdown:
-
-```lua
+<CodeGroup>
+```lua MultiDropdown.lua
+local MultiDropdown = Tabs.Main:AddDropdown("MultiDropdown", {
+	Title = "Dropdown",
+	Description = "You can select multiple values.",
+	Values = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen"},
+	Multi = true,
+})
+```
+```lua MultiDropdown_PreSelection.lua
 local MultiDropdown = Tabs.Main:AddDropdown("MultiDropdown", {
 	Title = "Dropdown",
 	Description = "You can select multiple values.",
@@ -166,30 +238,35 @@ local MultiDropdown = Tabs.Main:AddDropdown("MultiDropdown", {
 	Multi = true,
 	Default = {"seven", "twelve"},
 })
-
+-- This sets specific values in the multi-dropdown.
 MultiDropdown:SetValue({
 	three = true,
 	five = true,
 	seven = false
 })
 ```
+</CodeGroup>
+<Note>If you want to pre-select an option (or multiple), please use `MultiDropdown_PreSelection.lua`</Note>
+
 
 #### Colorpicker
 
 To add a color picker:
 
-```lua
+<CodeGroup>
+```lua ColorPicker.lua
 local Colorpicker = Tabs.Main:AddColorpicker("Colorpicker", {
 	Title = "Colorpicker",
 	Default = Color3.fromRGB(96, 205, 255)
 })
 ```
-
+</CodeGroup>
 #### Keybind
 
 For setting up a keybind:
 
-```lua
+<CodeGroup>
+```lua Keybind.lua
 local Keybind = Tabs.Main:AddKeybind("Keybind", {
 	Title = "KeyBind",
 	Mode = "Hold",
@@ -199,27 +276,27 @@ local Keybind = Tabs.Main:AddKeybind("Keybind", {
 	end
 })
 ```
-
+</CodeGroup>
 #### Input
 
 Add an input box:
 
-```lua
+<CodeGroup>
+```lua InputBox.lua
 local Input = Tabs.Main:AddInput("Input", {
 	Title = "Input",
 	Default = "Default",
 	Numeric = false,
 	Finished = false,
-	Placeholder = "Placeholder text",
-	Callback = function(Value)
-		print("Input changed:", Value)
-	end
+	Placeholder = "Placeholder text"
 })
 ```
+</CodeGroup>
 
 ### Events and Callbacks
 
-To handle changes in the components, you can use the following event listeners:
+To handle changes in the components, you can use the following <Tooltip tip="Event listeners capture and respond to changes or actions within your interface">event listeners</Tooltip>:
+
 <CodeGroup>
 ```lua ToggleCallback.lua
 Toggle:OnChanged(function()
@@ -258,23 +335,40 @@ TColorpicker:OnChanged(function()
 	)
 end)
 ```
+```lua InputChangedCallback.lua
+Input:OnChanged(function(Value)
+	print("Input changed:", Value)
+end)
+```
+```lua InputFinishedCallback.lua
+Input:OnFinished(function(Value)
+	print("Input finished:", Value)
+end)
+```
 </CodeGroup>
 
 ### Notifications
 
-To send a notification when the script is loaded:
-
-```lua
+To send a notification
+<Note>
+We recommend using notifications instead of warnings and print statements, as they don't affect your game metrics when reviewing overall game performance. Notifications will alert you in the corner of your screen if something fails to run, ensuring better visibility without cluttering your logs.
+</Note>
+<CodeGroup>
+```lua Notify.lua
 Main:Notify({
 	Title = "Fluent",
 	Content = "The script has been loaded.",
 	Duration = 8
 })
 ```
+</CodeGroup>
 
 ### Settings Tab
 
 You can also add settings for the interface theme and toggles for acrylic and transparency:
+<Warning>
+When using Acrylic, please ensure that your graphics level is set to 8 or higher; otherwise, the effect will not be visible on the screen.
+</Warning>
 
 <CodeGroup>
 
@@ -310,7 +404,7 @@ InterfaceSection:AddToggle("TransparentToggle", {
         Main:ToggleTransparency(Value)
     end
 })
-```lua InterfaceSection.lua
+```lua InterfaceSection
 InterfaceSection:AddKeybind("MenuKeybind", { Title = "Minimize Bind", Default = "RightShift" })
 Main.MinimizeKeybind = Main.Options.MenuKeybind 
 ```
