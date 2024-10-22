@@ -54,18 +54,12 @@
       "pages": [
         "introduction",
         "quickstart",
-        "development"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Fluent ",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "essentials/fluent",
       ]
     },
     {
