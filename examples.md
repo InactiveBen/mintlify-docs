@@ -1,6 +1,13 @@
 ### Example Code
 Want to try out Fluent without having your own custom interface? We offer an example script just for that reason!
 
+
+
+
+
+<Warning>
+You must have the Fluent Library installed in your workspace for this to work.
+<Accordion title="How do I get the Fluent Library?" icon="rocket"> 
   <Card
     title="Fluent Library Setup"
     icon="book"
@@ -8,24 +15,9 @@ Want to try out Fluent without having your own custom interface? We offer an exa
   >
     <p>Step-by-step instructions to install and configure the Fluent Library. Get started quickly with our detailed setup guide!</p>
   </Card>
-
-<Warning>
-You must have the Fluent Library installed in your workspace for this to work.
+</Accordion>
 </Warning>
-
-
-You can also test the interface in our Roblox testing place!
-<Warning>
-This is an example place, better examples are done below and are created to run in studio. There is no security with this you are expected to add your own checks.
-</Warning>
-
-  <Card
-    title="View the Fluent Interface"
-    icon="play"
-    href="https://www.roblox.com/games/110559969644935/Untitled-Game"
-  >
-    <p>Experience the Fluent Library in action!</p>
-  </Card>
+Create a `LocalScript` under `StarterPlayerScripts` to use the examples below. Keep in mind that the Fluent Library must be installed prior to using these examples.
 
 <CodeGroup>
 ```lua Example 1: Fluent Preview
