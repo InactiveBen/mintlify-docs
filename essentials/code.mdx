@@ -25,3 +25,93 @@ local Window = Main:Window{
     Theme = "Vynixu", -- The themes supported can be found in the themes category.
     MinimizeKey = Enum.KeyCode.RightControl -- Key to minimize or close the interface
 }
+```
+
+## Creating Tabs
+
+You can create multiple tabs within your window. Each tab can contain different UI elements.
+
+```lua
+local Tabs = {
+    Main = Window:Tab{
+        Title = "Main", -- The title of the tab
+        Icon = "circle-user-round" -- The icon for the tab
+    },
+    Settings = Window:Tab{
+        Title = "Settings", -- The title of the settings tab
+        Icon = "settings" -- The icon for the settings tab
+    }
+}
+```
+
+## Adding a Paragraph
+
+To add a paragraph to a tab, you can use the `Paragraph` method.
+
+```lua
+local Paragraph = Tabs.Main:Paragraph("Paragraph", {
+    Title = "Paragraph",
+    Content = "This is a paragraph.
+Second line!"
+})
+
+print(Paragraph.Value)
+
+Paragraph:SetValue("This paragraph text is changed!")
+
+print(Paragraph.Value)
+```
+
+## Adding a Button
+
+You can add buttons with callbacks for user interaction.
+
+```lua
+Tabs.Main:Button({
+    Title = "Button",
+    Description = "Very important button",
+    Callback = function()
+        local D = Window:Dialog({
+            Title = "Title",
+            Content = "This is a dialog",
+            Buttons = {
+                {
+                    Title = "Confirm",
+                    Callback = function()
+                        Window:Dialog({
+                            Title = "Another Dialog",
+                            Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse mollis dolor eget erat mattis, id mollis mauris cursus. Proin ornare sollicitudin odio, id posuere diam luctus id.",
+                            Buttons = { { Title = "Ok", Callback = function() print("Ok") end} }
+                        })
+                    end
+                },
+                {
+                    Title = "Cancel",
+                    Callback = function()
+                        print("Cancelled the dialog.")
+                    end
+                }
+            }
+        })
+        print(D)
+        D.Closed:Wait()
+        print("Ok!!!")
+    end
+})
+```
+
+## Adding a Toggle
+
+You can include toggle switches for binary options.
+
+```lua
+local Toggle = Tabs.Main:Toggle("Toggle", { Title = "Toggle", Default = false })
+
+Toggle:OnChanged(function(Value)
+    print("Toggle changed:", Value)
+end)
+```
+
+## Conclusion
+
+This documentation provides an overview of the Fluent UI library for Roblox, helping you get started with creating beautiful and functional user interfaces. Feel free to explore and customize the examples provided!
