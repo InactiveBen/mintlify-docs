@@ -1,8 +1,9 @@
 ---
 title: 'Fluent Examples'
-description: 'Test out Fluent without much work!'
+description: 'Easily test out Fluent with minimal effort!'
 icon: 'rocket'
 ---
+
 
 ### Example Code
 Want to try out Fluent without having your own custom interface? We offer an example script just for that reason!
