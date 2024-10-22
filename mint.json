@@ -39,7 +39,9 @@
       "pages": [
         "introduction",
         "quickstart",
-		"core"
+		"core",
+        "compnents"
+
 
       ]
     },
