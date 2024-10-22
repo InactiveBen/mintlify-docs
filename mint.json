@@ -38,6 +38,8 @@
       "group": "Get Started",
       "pages": [
         "introduction",
+                "examples",
+
         "quickstart",
         "core",
         "components"
