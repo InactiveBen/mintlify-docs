@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Fluent Interface",
   "logo": {
-    "dark": "/logo/dark.svg",
+    "dark": "/logo/logodark.png",
     "light": "/logo/light.svg"
   },
   "favicon": "/favicon.svg",
