@@ -1,0 +1,39 @@
+
+---
+title: 'Fluent Examples'
+description: 'Easily test out Fluent with minimal effort!'
+icon: 'rocket'
+---
+
+### Fluent Properties
+
+Want to explore the Fluent library and its properties? Here's a breakdown of each key element.
+
+#### Properties
+| **Property**       | **Type**     | **Description**                                                         |
+|--------------------|--------------|-------------------------------------------------------------------------|
+| `Version`          | string       | Contains the library version                                            |
+| `OpenFrames`       | table        | *(To be defined?)*                                                      |
+| `Options`          | table        | Contains library options and elements                                   |
+| `Themes`           | table        | Contains library themes                                                 |
+| `Window`           | `Window`     | Contains created window                                                 |
+| `WindowFrame`      | `Frame`      | Contains window GUI frame                                               |
+| `Unloaded`         | boolean      | Indicates if Fluent is unloaded                                         |
+| `Theme`            | string       | Contains selected theme                                                 |
+| `DialogOpen`       | boolean      | Indicates if a dialog is open                                           |
+| `UseAcrylic`       | boolean      | Indicates if acrylic is enabled                                         |
+| `Acrylic`          | boolean      | *(To be defined?)*                                                      |
+| `Transparency`     | boolean      | Indicates if transparency is enabled                                    |
+| `MinimizeKeybind`  | `KeyCode`    | Contains keybind to minimize window                                     |
+| `MinimizeKey`      | `KeyCode`    | *(To be defined?)*                                                      |
+| `GUI`              | `ScreenGui`  | Contains library `ScreenGui`                                            |
+
+#### Methods
+| **Method**             | **Arguments**        | **Description**                                                    |
+|------------------------|----------------------|--------------------------------------------------------------------|
+| `CreateWindow(Config)`  | `Config`: table      | Creates a window                                                   |
+| `SetTheme(Theme)`       | `Theme`: string      | Sets the specified GUI theme                                        |
+| `Destroy()`             | -                    | Destroys window                                                    |
+| `ToggleAcrylic(State)`  | `State`: boolean     | Toggles acrylic rendering                                           |
+| `ToggleTransparency(State)` | `State`: boolean | Toggles transparency rendering                                      |
+| `Notify(Config)`        | `Config`: table      | Creates a notification                                              |
