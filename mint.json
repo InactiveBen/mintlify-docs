@@ -7,12 +7,12 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#007B7F",    
-    "light": "#00B3A6",    
-    "dark": "#005C5D",       
+    "primary": "#007B7F",
+    "light": "#00B3A6",
+    "dark": "#005C5D",
     "anchors": {
-      "from": "#007B7F",    
-      "to": "#00B3A6"       
+      "from": "#007B7F",
+      "to": "#00B3A6"
     }
   },
   "topbarLinks": [
@@ -38,8 +38,7 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-                "examples",
-
+        "examples",
         "quickstart",
         "core",
         "components"
@@ -49,8 +48,6 @@
   "footerSocials": {
     "x": "https://x.com/inactiveben",
     "discord": "https://discord.gg/FluentInterface"
-  }
-}
-{
+  },
   "theme": "venus"
 }
